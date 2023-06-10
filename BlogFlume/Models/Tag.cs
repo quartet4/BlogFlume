@@ -1,0 +1,29 @@
+﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
+
+namespace BlogFlume.Models;
+
+public class Tag
+{
+    public Tag(int id, int postId, string authorId, string text, Post post, IdentityUser author)
+    {
+        Id = id;
+        PostId = postId;
+        AuthorId = authorId;
+        Text = text;
+        Post = post;
+        Author = author;
+    }
+
+    public int Id { get; set; }
+    public int PostId { get; set; }
+    public string AuthorId { get; set; }
+
+    [Required]
+    [StringLength(25, ErrorMessage = "The {0} must be between {2} and {1} characters", MinimumLength = 2)]
+    public string Text { get; set; }
+    
+    public virtual Post Post { get; set; }
+    public virtual IdentityUser Author { get; set; }
+    
+}
