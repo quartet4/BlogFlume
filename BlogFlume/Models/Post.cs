@@ -1,11 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Identity;
 
 namespace BlogFlume.Models;
 
 public class Post
 {
-    public Post(int id, int blogId, string authorId, string title, string @abstract, string content, DateTime created, DateTime? updated, bool isReady, string slug, byte[] imageData, string contentType, IFormFile image)
+    public Post(int id, int blogId, string authorId, string title, string @abstract, string content, DateTime created, DateTime? updated, bool isReady, string slug, byte[] imageData, string contentType, IFormFile image, Blog blog, IdentityUser author)
     {
         Id = id;
         BlogId = blogId;
@@ -20,6 +21,8 @@ public class Post
         ImageData = imageData;
         ContentType = contentType;
         Image = image;
+        Blog = blog;
+        Author = author;
     }
 
     public int Id { get; set; }
@@ -54,4 +57,11 @@ public class Post
     
     [NotMapped]
     public IFormFile Image { get; set; }
+    
+    // Navigation properties
+    public virtual Blog Blog { get; set; }
+    public virtual IdentityUser Author { get; set; }
+
+    public virtual ICollection<Tag> Tags { get; set; } = new HashSet<Tag>();
+    public virtual ICollection<Comment> Comments { get; set; } = new HashSet<Comment>();
 }
