@@ -1,12 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using BlogFlume.Enums;
 using Microsoft.AspNetCore.Identity;
 
 namespace BlogFlume.Models;
 
 public class Post
 {
-    public Post(int id, int blogId, string authorId, string title, string @abstract, string content, DateTime created, DateTime? updated, bool isReady, string slug, byte[] imageData, string contentType, IFormFile image, Blog blog, IdentityUser author)
+    public Post(int id, int blogId, string authorId, string title, string @abstract, string content, DateTime created, DateTime? updated, ReadyStatus readyStatus, string slug, byte[] imageData, string contentType, IFormFile image, Blog blog, IdentityUser author)
     {
         Id = id;
         BlogId = blogId;
@@ -16,7 +17,7 @@ public class Post
         Content = content;
         Created = created;
         Updated = updated;
-        IsReady = isReady;
+        ReadyStatus = readyStatus;
         Slug = slug;
         ImageData = imageData;
         ContentType = contentType;
@@ -48,7 +49,7 @@ public class Post
     [Display(Name = "Updated Date")]
     public DateTime? Updated { get; set; }
 
-    public bool IsReady { get; set; }
+    public ReadyStatus ReadyStatus { get; set; }
 
     public string Slug { get; set; }
 
