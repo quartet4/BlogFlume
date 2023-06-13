@@ -1,11 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Identity;
 
 namespace BlogFlume.Models;
 
 public class Tag
 {
-    public Tag(int id, int postId, string authorId, string text, Post post, IdentityUser author)
+    public Tag(int id, int postId, string authorId, string text, Post post, BlogUser author)
     {
         Id = id;
         PostId = postId;
@@ -25,6 +24,6 @@ public class Tag
     
     // Navigation properties
     public virtual Post Post { get; set; }
-    public virtual IdentityUser Author { get; set; }
+    public virtual BlogUser Author { get; set; }
     
 }

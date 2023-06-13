@@ -1,12 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using BlogFlume.Enums;
-using Microsoft.AspNetCore.Identity;
 
 namespace BlogFlume.Models;
 
 public class Comment
 {
-    public Comment(int id, int postId, string authorId, string moderatorId, string body, DateTime created, DateTime? updated, DateTime? moderated, DateTime? deleted, string moderatedBody, ModerationType moderationType, Post post, IdentityUser author, IdentityUser moderator)
+    public Comment(int id, int postId, string authorId, string moderatorId, string body, DateTime created, DateTime? updated, DateTime? moderated, DateTime? deleted, string moderatedBody, ModerationType moderationType, Post post, BlogUser author, BlogUser moderator)
     {
         Id = id;
         PostId = postId;
@@ -47,7 +46,7 @@ public class Comment
     
     // Navigation properties
     public virtual Post Post { get; set; }
-    public virtual IdentityUser Author { get; set; }
-    public virtual IdentityUser Moderator { get; set; }
+    public virtual BlogUser Author { get; set; }
+    public virtual BlogUser Moderator { get; set; }
 
 }
