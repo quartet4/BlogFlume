@@ -5,7 +5,7 @@ namespace BlogFlume.Models;
 
 public class Blog
 {
-    public Blog(int id, string authorId, string name, string description, DateTime created, DateTime? updated, byte[] imageData, string contentType, IFormFile image, BlogUser author)
+    public Blog(int id, string authorId, string name, string description, DateTime created, DateTime? updated, byte[] imageData, string contentType)
     {
         Id = id;
         AuthorId = authorId;
@@ -15,8 +15,6 @@ public class Blog
         Updated = updated;
         ImageData = imageData;
         ContentType = contentType;
-        Image = image;
-        Author = author;
     }
 
     public int Id { get; set; }
@@ -45,9 +43,9 @@ public class Blog
     public string ContentType { get; set; }
 
     [NotMapped]
-    public IFormFile Image { get; set; }
+    public IFormFile? Image { get; set; }
     
     // Navigation property
-    public virtual BlogUser Author { get; set; }
+    public virtual BlogUser? Author { get; set; }
     public virtual ICollection<Post> Posts { get; set; } = new HashSet<Post>();
 }

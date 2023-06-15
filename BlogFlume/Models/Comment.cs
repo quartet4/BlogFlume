@@ -5,7 +5,7 @@ namespace BlogFlume.Models;
 
 public class Comment
 {
-    public Comment(int id, int postId, string authorId, string moderatorId, string body, DateTime created, DateTime? updated, DateTime? moderated, DateTime? deleted, string moderatedBody, ModerationType moderationType, Post post, BlogUser author, BlogUser moderator)
+    public Comment(int id, int postId, string authorId, string moderatorId, string body, DateTime created, DateTime? updated, DateTime? moderated, DateTime? deleted, string moderatedBody, ModerationType moderationType)
     {
         Id = id;
         PostId = postId;
@@ -18,9 +18,6 @@ public class Comment
         Deleted = deleted;
         ModeratedBody = moderatedBody;
         ModerationType = moderationType;
-        Post = post;
-        Author = author;
-        Moderator = moderator;
     }
 
     public int Id { get; set; }
@@ -45,8 +42,8 @@ public class Comment
     public ModerationType ModerationType { get; set; }
     
     // Navigation properties
-    public virtual Post Post { get; set; }
-    public virtual BlogUser Author { get; set; }
-    public virtual BlogUser Moderator { get; set; }
+    public virtual Post? Post { get; set; }
+    public virtual BlogUser? Author { get; set; }
+    public virtual BlogUser? Moderator { get; set; }
 
 }

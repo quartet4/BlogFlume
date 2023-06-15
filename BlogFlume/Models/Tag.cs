@@ -4,14 +4,12 @@ namespace BlogFlume.Models;
 
 public class Tag
 {
-    public Tag(int id, int postId, string authorId, string text, Post post, BlogUser author)
+    public Tag(int id, int postId, string authorId, string text)
     {
         Id = id;
         PostId = postId;
         AuthorId = authorId;
         Text = text;
-        Post = post;
-        Author = author;
     }
 
     public int Id { get; set; }
@@ -23,7 +21,7 @@ public class Tag
     public string Text { get; set; }
     
     // Navigation properties
-    public virtual Post Post { get; set; }
-    public virtual BlogUser Author { get; set; }
+    public virtual Post? Post { get; set; }
+    public virtual BlogUser? Author { get; set; }
     
 }
