@@ -10,8 +10,8 @@ public class ApplicationDbContext : IdentityDbContext<BlogUser>
         : base(options)
     {
     }
-    public DbSet<BlogFlume.Models.Blog>? Blog { get; set; }
-    public DbSet<BlogFlume.Models.Comment>? Comment { get; set; }
-    public DbSet<BlogFlume.Models.Post>? Post { get; set; }
-    public DbSet<BlogFlume.Models.Tag>? Tag { get; set; }
+    public DbSet<Blog>? Blog { get; set; }
+    public DbSet<Comment>? Comment { get; set; }
+    public DbSet<Post>? Post { get; set; }
+    public DbSet<Tag>? Tag { get; set; }
 }
