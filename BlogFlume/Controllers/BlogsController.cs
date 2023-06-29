@@ -57,6 +57,7 @@ namespace BlogFlume.Controllers
         {
             if (ModelState.IsValid)
             {
+                blog.Created = DateTime.UtcNow;
                 _context.Add(blog);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

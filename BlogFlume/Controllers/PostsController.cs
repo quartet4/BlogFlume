@@ -18,7 +18,7 @@ namespace BlogFlume.Controllers
         // GET: Posts
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Post.Include(p => p.Author).Include(p => p.Blog);
+            var applicationDbContext = _context.Post!.Include(p => p.Author).Include(p => p.Blog);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -55,14 +55,17 @@ namespace BlogFlume.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,BlogId,AuthorId,Title,Abstract,Content,Created,Updated,ReadyStatus,Slug,ImageData,ContentType")] Post post)
+        public async Task<IActionResult> Create([Bind("BlogId,Title,Abstract,Content,ReadyStatus,Image")] Post post)
         {
             if (ModelState.IsValid)
             {
+                post.Created = DateTime.UtcNow;
                 _context.Add(post);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            var asdf = ModelState.Values.Where(v => v.Errors.Count > 0);
+            Console.WriteLine(asdf);
             ViewData["AuthorId"] = new SelectList(_context.Users, "Id", "Id", post.AuthorId);
             ViewData["BlogId"] = new SelectList(_context.Blog, "Id", "Description", post.BlogId);
             return View(post);

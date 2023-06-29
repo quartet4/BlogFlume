@@ -11,13 +11,6 @@ public class Blog
         
     }
     
-    public Blog(string name, string description, byte[] imageData, string contentType)
-    {
-        Name = name;
-        Description = description;
-        ImageData = imageData;
-        ContentType = contentType;
-    }
     
     public Blog(int id, string authorId, string name, string description, DateTime created, DateTime? updated, byte[] imageData, string contentType)
     {
