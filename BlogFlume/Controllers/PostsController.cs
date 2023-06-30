@@ -45,8 +45,8 @@ namespace BlogFlume.Controllers
         // GET: Posts/Create
         public IActionResult Create()
         {
+            ViewData["BlogId"] = new SelectList(_context.Blog, "Id", "Name");
             ViewData["AuthorId"] = new SelectList(_context.Users, "Id", "Id");
-            ViewData["BlogId"] = new SelectList(_context.Blog, "Id", "Description");
             return View();
         }
 
@@ -84,17 +84,16 @@ namespace BlogFlume.Controllers
             {
                 return NotFound();
             }
-            ViewData["AuthorId"] = new SelectList(_context.Users, "Id", "Id", post.AuthorId);
             ViewData["BlogId"] = new SelectList(_context.Blog, "Id", "Description", post.BlogId);
             return View(post);
-        }
+        } 
 
         // POST: Posts/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,BlogId,AuthorId,Title,Abstract,Content,Created,Updated,ReadyStatus,Slug,ImageData,ContentType")] Post post)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,BlogId,Title,Abstract,Content,ReadyStatus,Image")] Post post)
         {
             if (id != post.Id)
             {
@@ -105,6 +104,7 @@ namespace BlogFlume.Controllers
             {
                 try
                 {
+                    post.Updated = DateTime.UtcNow;
                     _context.Update(post);
                     await _context.SaveChangesAsync();
                 }
