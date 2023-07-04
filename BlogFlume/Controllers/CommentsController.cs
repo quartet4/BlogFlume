@@ -16,14 +16,26 @@ namespace BlogFlume.Controllers
         }
 
         // GET: Comments
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> OriginalIndex()
+        {
+            var originalComments = await _context.Comment.ToListAsync();
+            return View("Index", originalComments);
+        }
+        
+        public async Task<IActionResult> ModeratedIndex()
+        {
+            var moderatedComments = await _context.Comment.Where(c => c.Moderated != null).ToListAsync();
+            return View("Index", moderatedComments);
+        }
+        
+        /*public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Comment.Include(c => c.Author).Include(c => c.Moderator).Include(c => c.Post);
             return View(await applicationDbContext.ToListAsync());
-        }
+        }*/
 
         // GET: Comments/Details/5
-        public async Task<IActionResult> Details(int? id)
+        /*public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Comment == null)
             {
@@ -41,16 +53,16 @@ namespace BlogFlume.Controllers
             }
 
             return View(comment);
-        }
+        }*/
 
         // GET: Comments/Create
-        public IActionResult Create()
+        /*public IActionResult Create()
         {
             ViewData["AuthorId"] = new SelectList(_context.Users, "Id", "Id");
             ViewData["ModeratorId"] = new SelectList(_context.Users, "Id", "Id");
             ViewData["PostId"] = new SelectList(_context.Set<Post>(), "Id", "Abstract");
             return View();
-        }
+        }*/
 
         // POST: Comments/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -65,9 +77,7 @@ namespace BlogFlume.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AuthorId"] = new SelectList(_context.Users, "Id", "Id", comment.AuthorId);
-            ViewData["ModeratorId"] = new SelectList(_context.Users, "Id", "Id", comment.ModeratorId);
-            ViewData["PostId"] = new SelectList(_context.Set<Post>(), "Id", "Abstract", comment.PostId);
+            
             return View(comment);
         }
 
