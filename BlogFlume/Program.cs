@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using BlogFlume.Data;
 using BlogFlume.Models;
+using BlogFlume.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,7 +24,13 @@ builder.Services.AddIdentity<BlogUser, IdentityRole>(options => options.SignIn.R
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
+// Register custom data service
+builder.Services.AddScoped<DataService>();
+
 var app = builder.Build();
+
+var dataService = app.Services.CreateScope().ServiceProvider.GetRequiredService<DataService>();
+await dataService.ManageDataAsync();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

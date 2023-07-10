@@ -16,9 +16,8 @@ public class BlogUser : IdentityUser
     [Display(Name = "Last Name")]
     public string LastName { get; set; }
 
-    [Required]
-    public byte[] ImageData { get; set; }
-    public string ContentType { get; set; }
+    public byte[]? ImageData { get; set; }
+    public string? ContentType { get; set; }
 
     [StringLength(100, ErrorMessage = "The {0} must be between {2} and {1} characters.", MinimumLength = 10)]
     public string FacebookUrl { get; set; }
