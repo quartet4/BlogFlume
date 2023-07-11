@@ -75,7 +75,6 @@ namespace BlogFlume.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("ContentType")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Email")
@@ -96,7 +95,6 @@ namespace BlogFlume.Migrations
                         .HasColumnType("character varying(50)");
 
                     b.Property<byte[]>("ImageData")
-                        .IsRequired()
                         .HasColumnType("bytea");
 
                     b.Property<string>("LastName")

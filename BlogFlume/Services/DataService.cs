@@ -63,7 +63,9 @@ public class DataService
             FirstName = "Jonathan",
             LastName = "Mendoza",
             PhoneNumber = "(626) 400-0180",
-            EmailConfirmed = true
+            EmailConfirmed = true,
+            FacebookUrl = "facebook.com",
+            TwitterUrl = "twitter.com"
         };
 
         await _userManager.CreateAsync(adminUser, "ChanWoo1!");
@@ -76,7 +78,9 @@ public class DataService
             FirstName = "Jon",
             LastName = "Mendoza",
             PhoneNumber = "(626) 400-0180",
-            EmailConfirmed = true
+            EmailConfirmed = true,
+            FacebookUrl = "facebook.com",
+            TwitterUrl = "twitter.com"
         };
 
         await _userManager.CreateAsync(modUser, "ChanWoo1!");
