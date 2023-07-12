@@ -1,8 +1,12 @@
+using System.Configuration;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using BlogFlume.Data;
 using BlogFlume.Models;
 using BlogFlume.Services;
+using BlogFlume.ViewModels;
+using Microsoft.Extensions.Configuration;
+using NuGet.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +30,16 @@ builder.Services.AddRazorPages();
 
 // Register custom data service
 builder.Services.AddScoped<DataService>();
+
+// Register pre-configured instance of MailSettings class
+
+IConfigurationRoot config = new ConfigurationBuilder()
+    .AddJsonFile("appsettings.json")
+    .AddEnvironmentVariables()
+    .Build();
+
+builder.Services.Configure<MailSettings>(config.GetRequiredSection("MailSettings"));
+builder.Services.AddScoped<IBlogEmailSender, EmailService>();
 
 var app = builder.Build();
 
